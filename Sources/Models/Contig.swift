@@ -28,7 +28,7 @@ struct Contig {
         var add = true
         
         for element in self.chain {
-            if (element == "N" || element = "n") {
+            if (element == "N" || element == "n") {
                 if (add) {
                     arrays.append(value)
                     add = false
