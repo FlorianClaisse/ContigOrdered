@@ -29,9 +29,10 @@ class ProgramState {
         
         for fastaFile in fastaFiles {
             let result = fastaFile.format()
-            let data = result.data(using: .utf8)
+            guard let data = result.data(using: .utf8) else { fatalError("Can't encode value for file \(fastaFile.name)") }
             
-            FileManager.default.createFile(atPath: output.appendingPathComponent(fastaFile.name).path, contents: data)
+            let response = FileManager.default.createFile(atPath: output.appendingPathComponent(fastaFile.name).path, contents: data)
+            guard response else { fatalError("Can't create file output for \(fastaFile.name)") }
         }
     }
 }
